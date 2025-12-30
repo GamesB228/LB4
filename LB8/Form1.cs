@@ -37,6 +37,7 @@ namespace LB8
                 chart1.Series[0].Points.AddXY(x, loop);
                 chart1.Series[1].Points.AddXY(x, rec);
             }
+
         }
     }
 }

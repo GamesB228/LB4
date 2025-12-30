@@ -1,85 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-namespace LB6
-{
-    public class StudentCatalog
+    namespace LB6
     {
-        public List<Student> Students { get; } = new List<Student>();
-
-        public void Add(Student student) => Students.Add(student);
-        public void Remove(Student student) => Students.Remove(student);
-
-        // 1. Отримати топ-3 студентів за результатом
-        public List<Student> GetWinners()
+        public class StudentCatalog
         {
-            return Students
-                .OrderBy(s => s.Result)
-                .TakeWhile((s, index) => index < 3 || s.Result == Students[2].Result)
-                .ToList();
-        }
+            public List<Student> Students { get; } = new List<Student>();
 
-        // 2. Сортування по курсу
-        public List<Student> SortByCourse()
-        {
-            return Students
-                .OrderBy(s => s.Course)
-                .ThenBy(s => s.FullName)
-                .ToList();
-        }
+            public void Add(Student student) => Students.Add(student);
+            public void Remove(Student student) => Students.Remove(student);
 
-        // 3. Фільтрація студентів конкретної групи
-        public List<Student> FilterByGroup(string group)
-        {
-            return Students.Where(s => s.Group == group).ToList();
-        }
+            public List<Student> GetWinners()
+            {
+                return Students
+                    .OrderBy(s => s.Result)
+                    .TakeWhile((s, index) => index < 3 || s.Result == Students[2].Result)
+                    .ToList();
+            }
 
-        // 4. Фільтрація студентів за мінімальним результатом
-        public List<Student> FilterByMinResult(double minResult)
-        {
-            return Students.Where(s => s.Result <= minResult).ToList();
-        }
+            public List<Student> SortByCourse()
+            {
+                return Students
+                    .OrderBy(s => s.Course)
+                    .ThenBy(s => s.FullName)
+                    .ToList();
+            }
 
-        // 5. Сортування за ПІБ
-        public List<Student> SortByName()
-        {
-            return Students.OrderBy(s => s.FullName).ToList();
-        }
+            public List<Student> FilterByGroup(string group)
+            {
+                return Students.Where(s => s.Group == group).ToList();
+            }
 
-        public List<string> GetStudentNames()
-        {
-            return Students.Select(s => s.FullName).ToList();
-        }
-        public Dictionary<int, List<Student>> GroupByCourse()
-        {
-            return Students.GroupBy(s => s.Course)
-                           .ToDictionary(g => g.Key, g => g.ToList());
-        }
+          
+            public List<Student> FilterByMinResult(double minResult)
+            {
+                return Students.Where(s => s.Result <= minResult).ToList();
+            }
 
-        public double AverageResult()
-        {
-            return Students.Average(s => s.Result);
-        }
+    
+            public List<Student> SortByName()
+            {
+                return Students.OrderBy(s => s.FullName).ToList();
+            }
 
-        public Student GetBestStudent()
-        {
-            return Students.OrderBy(s => s.Result).FirstOrDefault();
-        }
+            public List<string> GetStudentNames()
+            {
+                return Students.Select(s => s.FullName).ToList();
+            }
+            public Dictionary<int, List<Student>> GroupByCourse()
+            {
+                return Students.GroupBy(s => s.Course)
+                               .ToDictionary(g => g.Key, g => g.ToList());
+            }
 
-        public Student GetWorstStudent()
-        {
-            return Students.OrderByDescending(s => s.Result).FirstOrDefault();
-        }
+            public double AverageResult()
+            {
+                return Students.Average(s => s.Result);
+            }
 
-        public List<string> GetNamesWithResultBelow(double maxResult)
-        {
-            return Students.Where(s => s.Result < maxResult)
-                           .Select(s => s.FullName)
-                           .ToList();
-        }
+            public Student GetBestStudent()
+            {
+                return Students.OrderBy(s => s.Result).FirstOrDefault();
+            }
 
+            public Student GetWorstStudent()
+            {
+                return Students.OrderByDescending(s => s.Result).FirstOrDefault();
+            }
+
+            public List<string> GetNamesWithResultBelow(double maxResult)
+            {
+                return Students.Where(s => s.Result < maxResult)
+                               .Select(s => s.FullName)
+                               .ToList();
+            }
+
+        }
     }
-}

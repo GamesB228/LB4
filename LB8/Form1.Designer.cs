@@ -56,9 +56,9 @@
             // 
             btnCalculate.Location = new Point(272, 12);
             btnCalculate.Name = "btnCalculate";
-            btnCalculate.Size = new Size(75, 23);
+            btnCalculate.Size = new Size(105, 23);
             btnCalculate.TabIndex = 2;
-            btnCalculate.Text = "button1";
+            btnCalculate.Text = "Вивести графік";
             btnCalculate.UseVisualStyleBackColor = true;
             btnCalculate.Click += btnCalculate_Click;
             // 
