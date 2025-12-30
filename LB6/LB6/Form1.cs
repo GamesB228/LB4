@@ -65,5 +65,55 @@ namespace LB6
             RefreshList(sorted);
         }
 
+        private void btnGetNames_Click(object sender, EventArgs e)
+        {
+            var names = catalog.GetStudentNames();
+            listBox1.Items.Clear();
+            foreach (var name in names)
+                listBox1.Items.Add(name);
+        }
+
+        private void btnGroupByCourse_Click(object sender, EventArgs e)
+        {
+            var groups = catalog.GroupByCourse();
+            listBox1.Items.Clear();
+            foreach (var group in groups)
+            {
+                listBox1.Items.Add($"Курс {group.Key}:");
+                foreach (var student in group.Value)
+                    listBox1.Items.Add($"  {student.FullName} - {student.Result} сек");
+            }
+        }
+
+        private void btnAverageResult_Click(object sender, EventArgs e)
+        {
+            double avg = catalog.AverageResult();
+            listBox1.Items.Clear();
+            listBox1.Items.Add($"Середній результат: {avg:F2} сек");
+        }
+
+        private void btnBestWorst_Click(object sender, EventArgs e)
+        {
+            var best = catalog.GetBestStudent();
+            var worst = catalog.GetWorstStudent();
+            listBox1.Items.Clear();
+            listBox1.Items.Add($"Найкращий: {best.FullName} - {best.Result} сек");
+            listBox1.Items.Add($"Найгірший: {worst.FullName} - {worst.Result} сек");
+        }
+
+        private void btnNamesBelowResult_Click(object sender, EventArgs e)
+        {
+            if (!double.TryParse(txtMaxResult.Text, out double max))
+            {
+                MessageBox.Show("Введіть число!");
+                return;
+            }
+
+            var names = catalog.GetNamesWithResultBelow(max);
+            listBox1.Items.Clear();
+            foreach (var name in names)
+                listBox1.Items.Add(name);
+        }
+
     }
 }
