@@ -28,7 +28,7 @@ namespace LB4
         {
             try
             {
-                // ===== ЦЕМЕНТ =====
+                
                 double cementPrice = double.Parse(CementPrice.Text);
                 int cementQty = int.Parse(CementQuantity.Text);
                 double cementWeight = double.Parse(CementWeight.Text);
@@ -40,10 +40,20 @@ namespace LB4
                     cementWeight
                 );
 
+                
+                double paintPrice = double.Parse(PaintPrice.Text);
+                int paintQty = int.Parse(PaintQuantity.Text);
+
+                Paint paint = new Paint(paintPrice, paintQty);
+                double paintCost = paint.CalculateCost();
+                PaintResult.Text = $"Вартість фарби: {paintCost} грн";
+
+                
+
                 double cementCost = cement.CalculateCost();
                 CementResult.Text = $"Вартість цементу: {cementCost} грн";
 
-                // ===== ДЕРЕВО =====
+                
                 double woodPrice = double.Parse(WoodPrice.Text);
                 int woodQty = int.Parse(WoodQuantity.Text);
                 string treatment =
@@ -59,13 +69,17 @@ namespace LB4
                 double woodCost = wood.CalculateCost();
                 WoodResult.Text = $"Вартість дерева: {woodCost} грн";
 
-                // ===== ЗАГАЛЬНА ВАРТІСТЬ =====
+                
+                List<ICostCalculable> list = new List<ICostCalculable>();
+                list.Add(cement);
+                list.Add(wood);
+                list.Add(paint);
+
                 MaterialCalculator calculator = new MaterialCalculator();
-                double total = calculator.TotalCost(
-                    new List<BuildingMaterial> { cement, wood }
-                );
+                double total = calculator.TotalCost(list);
 
                 TotalResult.Text = $"ЗАГАЛЬНА ВАРТІСТЬ: {total} грн";
+
             }
             catch
             {

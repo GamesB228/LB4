@@ -8,9 +8,16 @@ namespace LB4
 {
     public class MaterialCalculator
     {
-        public double TotalCost(List<BuildingMaterial> materials)
+        public double TotalCost(List<ICostCalculable> items)
         {
-            return materials.Sum(m => m.CalculateCost());
+            double total = 0;
+
+            foreach (ICostCalculable item in items)
+            {
+                total += item.CalculateCost();
+            }
+
+            return total;
         }
     }
 }

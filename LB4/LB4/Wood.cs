@@ -16,14 +16,10 @@ namespace LB4
             treatmentType = treatment;
         }
 
-        public double CalculateStrength()
-        {
-            return treatmentType == "Лакування" ? 1.5 : 1.0;
-        }
-
         public override double CalculateCost()
         {
-            return base.CalculateCost() * CalculateStrength();
+            double factor = treatmentType == "Лакування" ? 1.5 : 1.0;
+            return base.CalculateCost() * factor;
         }
     }
 }

@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace LB4
 {
-    public abstract class BuildingMaterial
+    public abstract class BuildingMaterial :
+        ICostCalculable, IDescribable
     {
         protected string name;
         protected double pricePerUnit;
         protected int quantity;
-
-        public string Name => name;
-        public int Quantity => quantity;
 
         protected BuildingMaterial(string name, double price, int quantity)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LB4
 {
-    public class Cement : BuildingMaterial
+    public class Cement : BuildingMaterial, IExpirable
     {
         private double bagWeight;
 
@@ -16,15 +16,15 @@ namespace LB4
             this.bagWeight = bagWeight;
         }
 
-        public bool CheckExpiry(DateTime expiryDate)
+        public bool CheckExpiry(DateTime date)
         {
-            return expiryDate > DateTime.Now;
+            return date > DateTime.Now;
         }
 
         public override double CalculateCost()
         {
-            double baseCost = base.CalculateCost();
-            return quantity > 50 ? baseCost * 0.9 : baseCost; // знижка
+            double cost = base.CalculateCost();
+            return quantity > 50 ? cost * 0.9 : cost;
         }
     }
 }
